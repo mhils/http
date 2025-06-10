@@ -5,7 +5,7 @@ use std::{ops, str};
 #[derive(Debug, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub(crate) struct ByteStr {
     // Invariant: bytes contains valid UTF-8
-    bytes: Bytes,
+    pub(crate) bytes: Bytes,
 }
 
 impl ByteStr {

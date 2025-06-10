@@ -1109,6 +1109,13 @@ impl<'a> From<StandardHeader> for HdrName<'a> {
 }
 
 impl HeaderName {
+    /// http-zoll: Convert a potentially invalid slice of bytes to an HTTP header name.
+    pub fn from_invalid_bytes(src: &[u8]) -> Self {
+        Custom(ByteStr {
+            bytes: Bytes::copy_from_slice(src),
+        })
+        .into()
+    }
     /// Converts a slice of bytes to an HTTP header name.
     ///
     /// This function normalizes the input.

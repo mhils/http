@@ -6,7 +6,6 @@ use std::fmt::Write;
 use std::hash::{Hash, Hasher};
 use std::str::FromStr;
 use std::{cmp, fmt, str};
-
 use crate::header::name::HeaderName;
 
 /// Represents an HTTP header field value.
@@ -40,6 +39,13 @@ pub struct ToStrError {
 }
 
 impl HeaderValue {
+    /// http-zoll: Convert a potentially invalid slice of bytes to an HTTP header name.
+    pub fn from_invalid_bytes(src: &[u8]) -> Self {
+        Self {
+            inner: Bytes::copy_from_slice(src),
+            is_sensitive: false,
+        }
+    }
     /// Convert a static string to a `HeaderValue`.
     ///
     /// This function will not perform any copying, however the string is
